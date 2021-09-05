@@ -1,0 +1,430 @@
+Creating database:
+->create database customer;
+
+Database usage:
+-> use customer;
+
+Creating table:
+->  create table customerinfo(customerid int auto_increment primary key,customername varchar(20),customercity varchar(20),customeraddress varchar(50),customermoblieno bigint unique,PAN varchar(20) unique,customerpassword varchar(80))auto_increment=100;
+
+Inserting values:
+->insert into customerinfo values(100,'vishaali','Theni','NRT Nagar',9345811147,'ABCD1234LK',MD5('vish00'));
+->insert into customerinfo values(101,'Thrisha','Chennai','karapakkam',9345812547,'PLKJ1258LK',MD5('thrish22'));
+->insert into customerinfo values(102,'narain','Coimbatore','Bharathiyar road',8325812547,'LPOU1298LK',MD5('narain@08'));
+->insert into customerinfo values(103,'sukirthan','Madurai','Germanus',8581254007,'PLOGN15874',MD5('Sukir28'));
+->insert into customerinfo values(104,'baskar','Periyakulam','Theni main road',7591254007,'LOPGN45874',MD5('baskar71'));
+->insert into customerinfo values(105,'parasakthi','Tirunelveli','KTC Nagar',9635854407,'KIVGN42574',MD5('sakthi02'));
+->insert into customerinfo values(106,'anushaa','Theni','Near Krishna Threatre',8569857407,'NFRU2574NN',MD5('anush#45'));
+->insert into customerinfo values(107,'dheena','Chennai','Anna Nagar',7598857327,'BGTH2574BB',MD5('dheenaK'));
+->insert into customerinfo values(108,'Kuga Priyan','Tirunelveli','Anubu Nagar',7598235877,'JKIRT6985',MD5('KUga28'));
+->insert into customerinfo values(109,'Sowbarniga','Theni','Near Periyakulam Road',6598235857,'KOP1234LOF',MD5('Barnika89'));
+
+Displaying values:
+-> select *from customerinfo;
++------------+--------------+--------------+-----------------------+------------------+------------+----------------------------------+
+| customerid | customername | customercity | customeraddress       | customermoblieno | PAN        | customerpassword                 |
++------------+--------------+--------------+-----------------------+------------------+------------+----------------------------------+
+|        100 | vishaali     | Theni        | NRT Nagar             |       9345811147 | ABCD1234LK | dd4641f8dee3710465d56489e160697f |
+|        101 | Thrisha      | Chennai      | karapakkam            |       9345812547 | PLKJ1258LK | b4726bfd5ae515e0b80fb4c588e3c804 |
+|        102 | narain       | Coimbatore   | Bharathiyar road      |       8325812547 | LPOU1298LK | aff8ede1f4350ca5dee7f3c52085efb3 |
+|        103 | sukirthan    | Madurai      | Germanus              |       8581254007 | PLOGN15874 | d9f30dc0ea4eb30e25507565e54902a6 |
+|        104 | baskar       | Periyakulam  | Theni main road       |       7591254007 | LOPGN45874 | e7cb724826262dc107ffea88af586d84 |
+|        105 | parasakthi   | Tirunelveli  | KTC Nagar             |       9635854407 | KIVGN42574 | 2b92be54cf81f1290361cba87f805540 |
+|        106 | anushaa      | Theni        | Near Krishna Threatre |       8569857407 | NFRU2574NN | 3ac44e24d0d9706c31c6abf6779ef3f1 |
+|        107 | dheena       | Chennai      | Anna Nagar            |       7598857327 | BGTH2574BB | 4e8f05189b4a19ac35391a4e781ad749 |
+|        108 | Kuga Priyan  | Tirunelveli  | Anubu Nagar           |       7598235877 | JKIRT6985  | cd52adaadf2eb72598e899d09a955186 |
+|        109 | Sowbarniga   | Theni        | Near Periyakulam Road |       6598235857 | KOP1234LOF | aaeb47698fcd3ee8eff975b242cf6a79 |
++------------+--------------+--------------+-----------------------+------------------+------------+----------------------------------+
+10 rows in set (0.04 sec)
+
+Creating AccountInfo table:
+->create table AccountInofo(accountid bigint auto_increment primary key,customerid int,foreign key(customerid)references customerinfo(customerid),AccountType varchar(20),AccountBalance bigint,AccountOpenDate date,AccountStatus varchar(10) not null CHECK(AccountStatus in ('Open','Closed','Blocked')));
+
+Inserting into accountinfo:
+-> insert into AccountInofo values(15879631,100,'salary',20000,'2000-05-06','open');
+-> insert into AccountInofo values(15879632,102,'savings',30000,'2001-10-05','closed');
+-> insert into AccountInofo values(15879633,103,'current account',35000,'1999-12-15','blocked');
+-> insert into AccountInofo values(15879634,104,'salary',40000,'2005-11-03','closed');
+-> insert into AccountInofo values(15879635,105,'savings',45000,'2004-10-10','blocked');
+->insert into AccountInofo values(15879636,106,'salary',50000,'2003-09-09','open');
+-> insert into AccountInofo values(15879637,107,'savings',55000,'2002-12-12','closed');
+->insert into AccountInofo values(15879638,101,'current account',60000,'2000-03-02','blocked');
+-> insert into AccountInofo values(15879639,108,'savings',65000,'1998-12-04','open');
+->insert into AccountInofo values(15879640,109,'salary',70000,'2002-07-07','closed');
+
+Displaying values:
+-> select *from accountinofo;
+ 
++-----------+------------+-----------------+----------------+-----------------+---------------+
+| accountid | customerid | AccountType     | AccountBalance | AccountOpenDate | AccountStatus |
++-----------+------------+-----------------+----------------+-----------------+---------------+
+|  15879631 |        100 | salary          |          20000 | 2000-05-06      | open          |
+|  15879632 |        102 | savings         |          30000 | 2001-10-05      | closed        |
+|  15879633 |        103 | current account |          35000 | 1999-12-15      | blocked       |
+|  15879634 |        104 | salary          |          40000 | 2005-11-03      | closed        |
+|  15879635 |        105 | savings         |          45000 | 2004-10-10      | blocked       |
+|  15879636 |        106 | salary          |          50000 | 2003-09-09      | open          |
+|  15879637 |        107 | savings         |          55000 | 2002-12-12      | closed        |
+|  15879638 |        101 | current account |          60000 | 2000-03-02      | blocked       |
+|  15879639 |        108 | savings         |          65000 | 1998-12-04      | open          |
+|  15879640 |        109 | salary          |          70000 | 2002-07-07      | closed        |
++-----------+------------+-----------------+----------------+-----------------+---------------+
+10 rows in set (0.00 sec)
+
+
+Creating Transactioninfo table:
+create table transactioninfo(transactionid int auto_increment primary key,accountid bigint,foreign key(accountid)references accountinofo(accountid),transactiontype varchar(20) default 'NotDone',amount bigint check(amount>0),transactiondate date);
+
+Inserting values:
+->insert into transactioninfo values(120,15879631,'debit',60000,'2021-06-03');
+-> insert into transactioninfo values(121,15879633,'debit',70000,'2019-11-07');
+->insert into transactioninfo values(127,15879632,'credit',65000,'2020-12-27');
+-> insert into transactioninfo values(123,15879634,'credit',75000,'2020-04-10');
+-> insert into transactioninfo values(124,15879635,'debit',80000,'2019-11-03');
+->insert into transactioninfo values(125,15879636,'credit',85000,'2018-05-01');
+->insert into transactioninfo values(126,15879637,'debit',85500,'207-10-10');
+-> insert into transactioninfo values(128,15879638,'credit',85504,'2017-02-02');
+-> insert into transactioninfo values(129,15879639,'credit',90000,'2016-12-05');
+-> insert into transactioninfo values(130,15879640,'debit',90500,'2016-11-05');
+
+Displaying the table:
+->select *from transactioninfo;
+  
++---------------+-----------+-----------------+--------+-----------------+
+| transactionid | accountid | transactiontype | amount | transactiondate |
++---------------+-----------+-----------------+--------+-----------------+
+|           120 |  15879631 | debit           |  60000 | 2021-06-03      |
+|           121 |  15879633 | debit           |  70000 | 2019-11-07      |
+|           123 |  15879634 | credit          |  75000 | 2020-04-10      |
+|           124 |  15879635 | debit           |  80000 | 2019-11-03      |
+|           125 |  15879636 | credit          |  85000 | 2018-05-01      |
+|           126 |  15879637 | debit           |  85500 | 0207-10-10      |
+|           127 |  15879632 | credit          |  65000 | 2020-12-27      |
+|           128 |  15879638 | credit          |  85504 | 2017-02-02      |
+|           129 |  15879639 | credit          |  90000 | 2016-12-05      |
+|           130 |  15879640 | debit           |  90500 | 2016-11-05      |
++---------------+-----------+-----------------+--------+-----------------+
+10 rows in set (0.00 sec)
+
+
+
+Questions:
+
+1. Latest 5 transactions of an account (Enter Account ID as an Input).
+->insert into transactioninfo values(131,15879640,'credit',90505,'2017-02-05');
+->insert into transactioninfo values(132,15879640,'debit',10000,'2018-04-03');
+->insert into transactioninfo values(133,15879640,'credit',15000,'2018-12-14');
+-> insert into transactioninfo values(134,15879640,'credit',15500,'2018-11-14');
+-> insert into transactioninfo values(135,15879640,'debit',25500,'2020-03-02');
+
+select*from transactioninfo;
++---------------+-----------+-----------------+--------+-----------------+
+| transactionid | accountid | transactiontype | amount | transactiondate |
++---------------+-----------+-----------------+--------+-----------------+
+|           120 |  15879631 | debit           |  60000 | 2021-06-03      |
+|           121 |  15879633 | debit           |  70000 | 2019-11-07      |
+|           123 |  15879634 | credit          |  75000 | 2020-04-10      |
+|           124 |  15879635 | debit           |  80000 | 2019-11-03      |
+|           125 |  15879636 | credit          |  85000 | 2018-05-01      |
+|           126 |  15879637 | debit           |  85500 | 0207-10-10      |
+|           127 |  15879632 | credit          |  65000 | 2020-12-27      |
+|           128 |  15879638 | credit          |  85504 | 2017-02-02      |
+|           129 |  15879639 | credit          |  90000 | 2016-12-05      |
+|           130 |  15879640 | debit           |  90500 | 2016-11-05      |
+|           131 |  15879640 | credit          |  90505 | 2017-02-05      |
+|           132 |  15879640 | debit           |  10000 | 2018-04-03      |
+|           133 |  15879640 | credit          |  15000 | 2018-12-14      |
+|           134 |  15879640 | credit          |  15500 | 2018-11-14      |
+|           135 |  15879640 | debit           |  25500 | 2020-03-02      |
++---------------+-----------+-----------------+--------+-----------------+
+
+->select * from transactioninfo where accountid=15879640 order by transactiondate desc limit 5;
++---------------+-----------+-----------------+--------+-----------------+
+| transactionid | accountid | transactiontype | amount | transactiondate |
++---------------+-----------+-----------------+--------+-----------------+
+|           135 |  15879640 | debit           |  25500 | 2020-03-02      |
+|           133 |  15879640 | credit          |  15000 | 2018-12-14      |
+|           134 |  15879640 | credit          |  15500 | 2018-11-14      |
+|           132 |  15879640 | debit           |  10000 | 2018-04-03      |
+|           131 |  15879640 | credit          |  90505 | 2017-02-05      |
++---------------+-----------+-----------------+--------+-----------------+
+
+2.Transaction between two dates of an account (Enter Account ID as an Input)
+ ->select *from transactioninfo where accountid=15879640 and transactiondate between '2017-02-05' and '2020-03-02';
++---------------+-----------+-----------------+--------+-----------------+
+| transactionid | accountid | transactiontype | amount | transactiondate |
++---------------+-----------+-----------------+--------+-----------------+
+|           131 |  15879640 | credit          |  90505 | 2017-02-05      |
+|           132 |  15879640 | debit           |  10000 | 2018-04-03      |
+|           133 |  15879640 | credit          |  15000 | 2018-12-14      |
+|           134 |  15879640 | credit          |  15500 | 2018-11-14      |
+|           135 |  15879640 | debit           |  25500 | 2020-03-02      |
++---------------+-----------+-----------------+--------+-----------------+
+5 rows in set (0.00 sec)
+
+3. List of Accounts of a Customer (Enter Customer ID as an input)
+-> select * from accountinofo where customerid=100;
++-----------+------------+-------------+----------------+-----------------+---------------+
+| accountid | customerid | AccountType | AccountBalance | AccountOpenDate | AccountStatus |
++-----------+------------+-------------+----------------+-----------------+---------------+
+|  15879631 |        100 | salary      |          20000 | 2000-05-06      | open          |
++-----------+------------+-------------+----------------+-----------------+---------------+
+1 row in set (0.46 sec)
+
+4.List of customers(CustomerID,CustomerName,CustomerAddress,CustomerMobileNo, AccountID , AccountBalance).
+->select a.customerid,a.customername,a.customeraddress,a.customermoblieno,b.accountid,b.accountbalance from customerinfo a,accountinofo b where a.customerid=b.customerid;
++------------+--------------+-----------------------+------------------+-----------+----------------+
+| customerid | customername | customeraddress       | customermoblieno | accountid | accountbalance |
++------------+--------------+-----------------------+------------------+-----------+----------------+
+|        100 | vishaali     | NRT Nagar             |       9345811147 |  15879631 |          20000 |
+|        101 | Thrisha      | karapakkam            |       9345812547 |  15879638 |          60000 |
+|        102 | narain       | Bharathiyar road      |       8325812547 |  15879632 |          30000 |
+|        103 | sukirthan    | Germanus              |       8581254007 |  15879633 |          35000 |
+|        104 | baskar       | Theni main road       |       7591254007 |  15879634 |          40000 |
+|        105 | parasakthi   | KTC Nagar             |       9635854407 |  15879635 |          45000 |
+|        106 | anushaa      | Near Krishna Threatre |       8569857407 |  15879636 |          50000 |
+|        107 | dheena       | Anna Nagar            |       7598857327 |  15879637 |          55000 |
+|        108 | Kuga Priyan  | Anubu Nagar           |       7598235877 |  15879639 |          65000 |
+|        109 | Sowbarniga   | Near Periyakulam Road |       6598235857 |  15879640 |          70000 |
++------------+--------------+-----------------------+------------------+-----------+----------------+
+10 rows in set (0.00 sec)
+
+5.List of accounts with transactions (AccountID , AccountBalance , TransID , Amount, TransationType).
+->select a.accountid,a.accountbalance,b.transactionid,b.amount,b.transactiontype from accountinofo a,transactioninfo b where a.accountid=b.accountid;
++-----------+----------------+---------------+--------+-----------------+
+| accountid | accountbalance | transactionid | amount | transactiontype |
++-----------+----------------+---------------+--------+-----------------+
+|  15879631 |          20000 |           120 |  60000 | debit           |
+|  15879632 |          30000 |           127 |  65000 | credit          |
+|  15879633 |          35000 |           121 |  70000 | debit           |
+|  15879634 |          40000 |           123 |  75000 | credit          |
+|  15879635 |          45000 |           124 |  80000 | debit           |
+|  15879636 |          50000 |           125 |  85000 | credit          |
+|  15879637 |          55000 |           126 |  85500 | debit           |
+|  15879638 |          60000 |           128 |  85504 | credit          |
+|  15879639 |          65000 |           129 |  90000 | credit          |
+|  15879640 |          70000 |           130 |  90500 | debit           |
+|  15879640 |          70000 |           131 |  90505 | credit          |
+|  15879640 |          70000 |           132 |  10000 | debit           |
+|  15879640 |          70000 |           133 |  15000 | credit          |
+|  15879640 |          70000 |           134 |  15500 | credit          |
+|  15879640 |          70000 |           135 |  25500 | debit           |
++-----------+----------------+---------------+--------+-----------------+
+15 rows in set (0.00 sec)
+
+6. List of customers with accounts and transations (CustomerID,CustomerName,CustomerAddress,CustomerMobileNo, AccountID , AccountBalance,TransationID , Amount, TransationType)
+->select a.customerid,a.customername,a.customername,a.customermoblieno,b.accountid,b.accountbalance,c.transactionid,c.amount,c.transactiontype from customerinfo a,accountinofo b,transactioninfo c where a.customerid=b.customerid and b.accountid=c.accountid;
++------------+--------------+--------------+------------------+-----------+----------------+---------------+--------+-----------------+
+| customerid | customername | customername | customermoblieno | accountid | accountbalance | transactionid | amount | transactiontype |
++------------+--------------+--------------+------------------+-----------+----------------+---------------+--------+-----------------+
+|        100 | vishaali     | vishaali     |       9345811147 |  15879631 |          20000 |           120 |  60000 | debit           |
+|        101 | Thrisha      | Thrisha      |       9345812547 |  15879638 |          60000 |           128 |  85504 | credit          |
+|        102 | narain       | narain       |       8325812547 |  15879632 |          30000 |           127 |  65000 | credit          |
+|        103 | sukirthan    | sukirthan    |       8581254007 |  15879633 |          35000 |           121 |  70000 | debit           |
+|        104 | baskar       | baskar       |       7591254007 |  15879634 |          40000 |           123 |  75000 | credit          |
+|        105 | parasakthi   | parasakthi   |       9635854407 |  15879635 |          45000 |           124 |  80000 | debit           |
+|        106 | anushaa      | anushaa      |       8569857407 |  15879636 |          50000 |           125 |  85000 | credit          |
+|        107 | dheena       | dheena       |       7598857327 |  15879637 |          55000 |           126 |  85500 | debit           |
+|        108 | Kuga Priyan  | Kuga Priyan  |       7598235877 |  15879639 |          65000 |           129 |  90000 | credit          |
+|        109 | Sowbarniga   | Sowbarniga   |       6598235857 |  15879640 |          70000 |           130 |  90500 | debit           |
+|        109 | Sowbarniga   | Sowbarniga   |       6598235857 |  15879640 |          70000 |           131 |  90505 | credit          |
+|        109 | Sowbarniga   | Sowbarniga   |       6598235857 |  15879640 |          70000 |           132 |  10000 | debit           |
+|        109 | Sowbarniga   | Sowbarniga   |       6598235857 |  15879640 |          70000 |           133 |  15000 | credit          |
+|        109 | Sowbarniga   | Sowbarniga   |       6598235857 |  15879640 |          70000 |           134 |  15500 | credit          |
+|        109 | Sowbarniga   | Sowbarniga   |       6598235857 |  15879640 |          70000 |           135 |  25500 | debit           |
++------------+--------------+--------------+------------------+-----------+----------------+---------------+--------+-----------------+
+15 rows in set (0.00 sec)
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+OnlineFoodOrderingDB
+
+create database
+
+-> create database OnlineFoodOrderingDB;
+
+use database
+
+->use OnlineFoodOrderingDB;
+
+creating table:
+
+->create table restaurants(restaurantid int auto_increment primary key,restaurantname varchar(20),restraurantaddress varchar(20),restaurantcity varchar(20),contactno bigint);
+
+Inserting values:
+-> insert into restaurants values(10,'maruthi','Periyakulam Road','Theni',9856321567);
+->insert into restaurants values(11,'butter bun','NRT Nagar','Periyakulam',9855321567);
+-> insert into restaurants values(12,'bakery king','Bharathi Road','Coimbatore',8855321567);
+->insert into restaurants values(13,'Mug and beans','Central station','Madurai',8855321577);
+-> insert into restaurants values(14,'kamaliya garden','VNR outer','VNR',8855221520);
+-> insert into restaurants values(15,'kamaliya','Near Kamaraj Statue','VNR',8855221577);
+
+displaying table:
+select*from restaurants;
++--------------+-----------------+---------------------+----------------+------------+
+| restaurantid | restaurantname  | restraurantaddress  | restaurantcity | contactno  |
++--------------+-----------------+---------------------+----------------+------------+
+|           10 | maruthi         | Periyakulam Road    | Theni          | 9856321567 |
+|           11 | butter bun      | NRT Nagar           | Periyakulam    | 9855321567 |
+|           12 | bakery king     | Bharathi Road       | Coimbatore     | 8855321567 |
+|           13 | Mug and beans   | Central station     | Madurai        | 8855321577 |
+|           14 | kamaliya garden | VNR outer           | VNR            | 8855221520 |
+|           15 | kamaliya        | Near Kamaraj Statue | VNR            | 8855221577 |
++--------------+-----------------+---------------------+----------------+------------+
+6 rows in set (0.00 sec)
+
+creating table:
+create table rmenuitems(menuid int auto_increment primary key,restaurantid int,foreign key(restaurantid) references restaurants(restaurantid),menuname varchar(20),menutype varchar(20),menucategory varchar(20),menuprice int,menudesc varchar(20));
+
+Inserting values:
+->insert into rmenuitems values(50,10,'veg','dessert','dinner',90,'brownie');
+->insert into rmenuitems values(51,11,'veg','main dish','breakfast',100,'dosa');
+->insert into rmenuitems values(52,12,'non-veg','main dish','lunch',150,'chicken briyani');
+->insert into rmenuitems values(53,13,'non-veg','main dish','dinner',120,'mixed noodles');
+-> insert into rmenuitems values(54,14,'veg','salad','snacks',50,'panner salad');
+->insert into rmenuitems values(55,15,'non-veg','side dish','breakfast',100,'curry dosai');
+
+Displaying table:
+select*from rmenuitems;
++--------+--------------+----------+-----------+--------------+-----------+-----------------+
+| menuid | restaurantid | menuname | menutype  | menucategory | menuprice | menudesc        |
++--------+--------------+----------+-----------+--------------+-----------+-----------------+
+|     50 |           10 | veg      | dessert   | dinner       |        90 | brownie         |
+|     51 |           11 | veg      | main dish | breakfast    |       100 | dosa            |
+|     52 |           12 | non-veg  | main dish | lunch        |       150 | chicken briyani |
+|     53 |           13 | non-veg  | main dish | dinner       |       120 | mixed noodles   |
+|     54 |           14 | veg      | salad     | snacks       |        50 | panner salad    |
+|     55 |           15 | non-veg  | side dish | breakfast    |       100 | curry dosai     |
++--------+--------------+----------+-----------+--------------+-----------+-----------------+
+6 rows in set (0.00 sec)
+
+
+Creating table:
+create table customers(customerid varchar(20) primary key,customername varchar(20),customercity varchar(10),customerDOB date,customergender varchar(10) check(customergender IN('F','M','T')),customerpassword varchar(50));
+
+Inserting values:
+->insert into customers values('vishaali@gmail.com','vishaali','Theni','2000-05-06','F',MD5('vish@06'));
+->insert into customers values('baskar@gmail.com','baskar','madurai','1971-05-04','M',MD5('baskar'));
+-> insert into customers values('narain@gmail.com','narain','tvl','2008-02-28','M',MD5('narain8'));
+-> insert into customers values('sakthi14@gmail.com','parasakthi','cbe','1977-10-14','F',MD5('sakthi14'));
+-> insert into customers values('sukir28@gmail.com','sukirthan','theni','2007-10-13','M',MD5('sukir'));
+->insert into customers values('anushaa@gmail.com','anushaa','chennai','1999-06-26','F',MD5('ansuh@26'));
+
+Displaying table:
+
+-> select*from customers;
++--------------------+--------------+--------------+-------------+----------------+----------------------------------+
+| customerid         | customername | customercity | customerDOB | customergender | customerpassword                 |
++--------------------+--------------+--------------+-------------+----------------+----------------------------------+
+| anushaa@gmail.com  | anushaa      | chennai      | 1999-06-26  | F              | e863b64bd81f5732a11713184ddc8af1 |
+| baskar@gmail.com   | baskar       | madurai      | 1971-05-04  | M              | 8a567c484832dbcfe5b311cdaedb5625 |
+| narain@gmail.com   | narain       | tvl          | 2008-02-28  | M              | 8dc4af1754008b7d2cd642ce4f0edde2 |
+| sakthi14@gmail.com | parasakthi   | cbe          | 1977-10-14  | F              | 54a1d1a247256fc4e11bf9a4bc6a9e37 |
+| sukir28@gmail.com  | sukirthan    | theni        | 2007-10-13  | M              | a100b3ee7ea55fd9e589a1fa0dea2835 |
+| vishaali@gmail.com | vishaali     | Theni        | 2000-05-06  | F              | 58b2521226e5d8316d1b54a1a45d90d6 |
++--------------------+--------------+--------------+-------------+----------------+----------------------------------+
+
+Creating table:
+create table orders(orderid int auto_increment primary key,customerid varchar(20),foreign key(customerid) references customers(customerid),orderdate date,deliveryaddress varchar(20),orderstatus varchar(20) check(orderstatus in('Delivered','Cancelled')));
+
+Inserting values:
+-> insert into orders values(31,' baskar@gmail.com  ','2021-03-22','Cbe','Cancelled');
+->insert into orders values(30,'anushaa@gmail.com','2021-02-03','Theni','Delivered');
+->insert into orders values(33,'narain@gmail.com','2021-04-22','tvl','Delivered');
+->insert into orders values(34,'sakthi14@gmail.com','2021-05-06','cbe','Delivered');
+->insert into orders values(32,'sukir28@gmail.com','2021-05-08','theni','Cancelled');
+-> insert into orders values(35,'vishaali@gmail.com','2020-05-08','theni','Cancelled');
+
+
+Displaying table:
+-> select*from orders;
++---------+--------------------+------------+-----------------+-------------+
+| orderid | customerid         | orderdate  | deliveryaddress | orderstatus |
++---------+--------------------+------------+-----------------+-------------+
+|      30 | anushaa@gmail.com  | 2021-02-03 | Theni           | Delivered   |
+|      31 | baskar@gmail.com   | 2021-03-22 | Cbe             | Cancelled   |
+|      32 | sukir28@gmail.com  | 2021-05-08 | theni           | Cancelled   |
+|      33 | narain@gmail.com   | 2021-04-22 | tvl             | Delivered   |
+|      34 | sakthi14@gmail.com | 2021-05-06 | cbe             | Delivered   |
+|      35 | vishaali@gmail.com | 2020-05-08 | theni           | Cancelled   |
++---------+--------------------+------------+-----------------+-------------+
+6 rows in set (0.00 sec)
+
+Creating tables:
+ create table ordermenus(orderid int,foreign key(orderid)references orders(orderid),menuid int,foreign key(menuid)references rmenuitems(menuid),menuqty int,menuprice int);
+
+Inserting values:
+-> insert into ordermenus values(31,51,1,100);
+-> insert into ordermenus values(32,52,5,860);
+->insert into ordermenus values(30,50,3,250);
+->insert into ordermenus values(33,53,2,250);
+->insert into ordermenus values(34,55,1,90);
+-> insert into ordermenus values(35,54,7,1050);
+
+Displaying table:
+->select*from ordermenus;
++---------+--------+---------+-----------+
+| orderid | menuid | menuqty | menuprice |
++---------+--------+---------+-----------+
+|      30 |     50 |       3 |       250 |
+|      31 |     51 |       1 |       100 |
+|      32 |     52 |       5 |       860 |
+|      33 |     53 |       2 |       250 |
+|      34 |     55 |       1 |        90 |
+|      35 |     54 |       7 |      1050 |
++---------+--------+---------+-----------+
+6 rows in set (0.00 sec)
+
+1. Show the list of Restaurant of specific city
+
+-> select restaurantname,restaurantcity from restaurants where restaurantcity='VNR';
++-----------------+----------------+
+| restaurantname  | restaurantcity |
++-----------------+----------------+
+| kamaliya garden | VNR            |
+| kamaliya        | VNR            |
++-----------------+----------------+
+2 rows in set (0.00 sec)
+
+2.Show the list of all Restaurants along with menus (RestaurantID , RestaurantName ,MenuID , MenuName , MenuPrice)
+
+-> select a.restaurantid,a.restaurantname,b.menuid,b.menuname,b.menuprice from restaurants a,rmenuitems b where a.restaurantid=b.restaurantid;
++--------------+-----------------+--------+----------+-----------+
+| restaurantid | restaurantname  | menuid | menuname | menuprice |
++--------------+-----------------+--------+----------+-----------+
+|           10 | maruthi         |     50 | veg      |        90 |
+|           11 | butter bun      |     51 | veg      |       100 |
+|           12 | bakery king     |     52 | non-veg  |       150 |
+|           13 | Mug and beans   |     53 | non-veg  |       120 |
+|           14 | kamaliya garden |     54 | veg      |        50 |
+|           15 | kamaliya        |     55 | non-veg  |       100 |
++--------------+-----------------+--------+----------+-----------+
+6 rows in set (0.02 sec)
+
+3. Show the list of  Restaurants along with menus (RestaurantID , RestaurantName ,MenuID , MenuName , MenuPrice) of specific city
+
+-> select a.restaurantid,a.restaurantname,b.menuid,b.menuname,b.menuprice from restaurants a,rmenuitems b where a.restaurantcity='Theni';
++--------------+----------------+--------+----------+-----------+
+| restaurantid | restaurantname | menuid | menuname | menuprice |
++--------------+----------------+--------+----------+-----------+
+|           10 | maruthi        |     50 | veg      |        90 |
+|           10 | maruthi        |     51 | veg      |       100 |
+|           10 | maruthi        |     52 | non-veg  |       150 |
+|           10 | maruthi        |     53 | non-veg  |       120 |
+|           10 | maruthi        |     54 | veg      |        50 |
+|           10 | maruthi        |     55 | non-veg  |       100 |
++--------------+----------------+--------+----------+-----------+
+6 rows in set (0.00 sec)
+
+4. Show the list of Orders of a specific customer
+
+->
+
+5.Show the list of orders along with ordermenus of a specific customer
+
+
+6.Show the list of latest 5 orders of a specific customer
+
+
